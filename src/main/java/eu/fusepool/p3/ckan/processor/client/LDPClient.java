@@ -136,8 +136,8 @@ public class LDPClient {
             connection.setDoInput(true);
 
             final MimeType mimeType = new MimeType(connection.getContentType());
-            //final InputStream inputStream = connection.getInputStream();
-            final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 100)); // for testing only
+            final InputStream inputStream = connection.getInputStream();
+            //final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 100)); // for testing only
 
             return new PersitentEntity(mimeType, inputStream);
 
