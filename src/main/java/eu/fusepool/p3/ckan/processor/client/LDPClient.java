@@ -35,16 +35,17 @@ public class LDPClient {
      * Queries the distributions from the target URI.
      *
      * @param targetURI
+     * @param graphURI
      * @param query
      * @return
      * @throws IOException
      * @throws JSONException
      */
-    public static Map<String, Label> getDistributions(String targetURI, String query) throws IOException, JSONException {
+    public static Map<String, Label> getDistributions(String targetURI, String graphURI, String query) throws IOException, JSONException {
 
         HttpURLConnection connection = null;
 
-        final String urlParameters = "default-graph-uri=&query=" + URLEncoder.encode(query, "UTF-8");
+        final String urlParameters = "default-graph-uri=" + URLEncoder.encode(graphURI, "UTF-8") + "&query=" + URLEncoder.encode(query, "UTF-8");
 
         try {
             URL url = new URL(targetURI);
@@ -137,7 +138,7 @@ public class LDPClient {
 
             final MimeType mimeType = new MimeType(connection.getContentType());
             final InputStream inputStream = connection.getInputStream();
-            //final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 100)); // for testing only
+            //final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 200)); // for testing only
 
             return new PersitentEntity(mimeType, inputStream);
 
