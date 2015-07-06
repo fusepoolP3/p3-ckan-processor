@@ -16,6 +16,7 @@ Currenly the only way to use the application is through its REST endpoint.
 
 ## Issues
 * Currenly it has no user interface, just a blank welcome page.
+* Adding the transformered results to an LDPC is really slow.
 * No feedback on whether the request successfully finished or failed.
 * LDPC names are sometimes differ from the original p3:LDPC label.
 
