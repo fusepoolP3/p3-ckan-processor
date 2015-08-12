@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CKAN Processor REST Servlet</servlet-name>
-        <url-pattern>/endpoint/*</url-pattern>
+        <url-pattern>/async-processor/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

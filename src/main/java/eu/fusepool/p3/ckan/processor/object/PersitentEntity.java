@@ -1,7 +1,6 @@
 package eu.fusepool.p3.ckan.processor.object;
 
 import eu.fusepool.p3.transformer.commons.Entity;
-import eu.fusepool.p3.transformer.commons.util.WritingEntity;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;

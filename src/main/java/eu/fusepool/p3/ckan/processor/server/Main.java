@@ -1,5 +1,9 @@
 package eu.fusepool.p3.ckan.processor.server;
 
+import eu.fusepool.p3.ckan.processor.object.Result;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.wymiwyg.commons.util.arguments.ArgumentHandler;

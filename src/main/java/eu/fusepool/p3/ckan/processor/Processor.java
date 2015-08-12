@@ -5,7 +5,9 @@ import eu.fusepool.p3.ckan.processor.client.TransformerClient;
 import eu.fusepool.p3.ckan.processor.object.Label;
 import eu.fusepool.p3.transformer.commons.Entity;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
@@ -36,7 +38,7 @@ public class Processor implements Runnable {
     @Override
     public void run() {
         try {
-
+            List<String> contentLocations = new ArrayList<>();
             Map<String, Label> distributions = LDPClient.getDistributions(sparqlEndPoint, dataSet, query);
 
             for (Map.Entry<String, Label> entry : distributions.entrySet()) {
@@ -64,14 +66,16 @@ public class Processor implements Runnable {
                         Entity transformerData = TransformerClient.transform(label.transformer, originalData);
                         // write transformed distribution to LDPC
                         for (String LDPC : label.LDPCs) {
-                            LDPClient.sendToLDPC(LDPC, tentativeName + "-transformed", transformerData);
+                            String location = LDPClient.sendToLDPC(LDPC, tentativeName + "-transformed", transformerData);
+                            contentLocations.add(location);
                         }
                     }
                 }
             }
+            SyncResult.setStatusSuccess(Thread.currentThread().getName(), contentLocations.toArray(new String[contentLocations.size()]));
+
         } catch (Exception e) {
-            // TODO handle exception in some way
-            e.printStackTrace();
+            SyncResult.setStatusFailure(Thread.currentThread().getName(), e);
         }
     }
 

@@ -4,7 +4,6 @@ import eu.fusepool.p3.ckan.processor.object.Label;
 import eu.fusepool.p3.ckan.processor.object.LabelType;
 import eu.fusepool.p3.ckan.processor.object.PersitentEntity;
 import eu.fusepool.p3.transformer.commons.Entity;
-import eu.fusepool.p3.transformer.commons.util.InputStreamEntity;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
@@ -137,8 +136,8 @@ public class LDPClient {
             connection.setDoInput(true);
 
             final MimeType mimeType = new MimeType(connection.getContentType());
-            final InputStream inputStream = connection.getInputStream();
-            //final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 200)); // for testing only
+            //final InputStream inputStream = connection.getInputStream();
+            final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 100)); // for testing only
 
             return new PersitentEntity(mimeType, inputStream);
 
