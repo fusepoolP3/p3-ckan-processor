@@ -32,7 +32,7 @@ public class EndPoint {
     public Response get(@PathParam("requestId") String requestId) {
         Result result = SyncResult.getStatus(requestId);
         if (result.isProcessing()) {
-            return Response.status(Response.Status.ACCEPTED).entity("Processing...").build();
+            return Response.status(Response.Status.ACCEPTED).entity("Status: PROCESSING").build();
         } else {
             if (result.isSuccess()) {
                 return Response.status(Response.Status.OK).entity(result.getSuccessData()).build();
