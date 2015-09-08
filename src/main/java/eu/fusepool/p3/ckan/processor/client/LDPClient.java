@@ -137,7 +137,7 @@ public class LDPClient {
 
             final MimeType mimeType = new MimeType(connection.getContentType());
             final InputStream inputStream = connection.getInputStream();
-            //final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 100)); // for testing only
+            //final InputStream inputStream = IOUtils.toBufferedInputStream(readLines(connection.getInputStream(), 200)); // for testing only
 
             return new PersitentEntity(mimeType, inputStream);
 
@@ -186,7 +186,13 @@ public class LDPClient {
                 response = IOUtils.toString(inputStream, "UTF-8");
             }
 
-            return response;
+            int status = connection.getResponseCode();
+            String location = "";
+            if (status == HttpURLConnection.HTTP_CREATED) {
+                location = connection.getHeaderField("Location");
+            }
+
+            return location;
 
         } finally {
             if (connection != null) {
